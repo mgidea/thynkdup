@@ -23,7 +23,6 @@ class NutshellsController < ApplicationController
 
   def nutshell_params
     params.require(:nutshell).permit(:title, :content)
-
   end
 end
 
