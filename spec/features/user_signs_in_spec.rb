@@ -35,4 +35,17 @@ feature "User signs in", %Q{
     expect(page).to have_content "Login"
     expect(page).to_not have_content "Logout"
   end
+
+  scenario "user enters invalid password" do
+    user = FactoryGirl.create(:user)
+    visit root_path
+    click_link "Login"
+    fill_in "Email", with: user.email
+    fill_in "Password", with: "different"
+    click_button "Sign In"
+
+    expect(page).to have_content "Invalid email or password"
+    expect(page).to have_content "Login"
+    expect(page).to_not have_content "Logout"
+  end
 end
