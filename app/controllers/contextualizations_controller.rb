@@ -1,0 +1,2 @@
+class ContextualizationsController < ApplicationController
+end

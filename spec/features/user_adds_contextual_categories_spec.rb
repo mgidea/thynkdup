@@ -11,7 +11,8 @@ feature "User contextualizes nutshell", %Q{
   # -current users  will be prompted to fill in predetermined list after filling in "nutshell"
   # -Users must provide at least one point of context
   user = FactoryGirl.create(:user)
-    sign_in_as user
+  sign_in_as user
+
 
 end
 

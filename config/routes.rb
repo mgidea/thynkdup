@@ -1,6 +1,10 @@
 Thynkdup::Application.routes.draw do
 
-  resources :nutshells
+  resources :nutshells do
+    resources :contextualizations
+    resources :notes
+  end
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

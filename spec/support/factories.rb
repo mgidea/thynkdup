@@ -12,6 +12,6 @@ FactoryGirl.define do
   factory :nutshell do
     sequence(:title) {|n|"nutshell name#{n}"}
     content "I want to make nutshells"
-    user
+    association :user
   end
 end

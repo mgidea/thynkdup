@@ -1,5 +1,11 @@
 class NutshellsController < ApplicationController
 
+  def index
+
+    @nutshells = current_user.nutshells
+    binding.pry
+  end
+
   def new
     @nutshell = Nutshell.new
   end

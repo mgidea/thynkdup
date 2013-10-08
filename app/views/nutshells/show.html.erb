@@ -1,1 +1,5 @@
-<p><%= @nutshell.content %></p>
+<% @nutshell.user.nutshells.each do |nutshell| %>
+  <p class ="nutshell-title"><%= nutshell.title %></p>
+  <p class ="nutshell-content"><%= nutshell.content %></p>
+<% end %>
+
