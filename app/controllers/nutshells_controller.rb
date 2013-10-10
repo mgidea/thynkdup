@@ -1,19 +1,20 @@
 class NutshellsController < ApplicationController
 
   def index
-
     @nutshells = current_user.nutshells
   end
 
   def new
     @nutshell = Nutshell.new
+    @categorizations = @nutshell.categorizations.build
   end
 
   def create
     @nutshell = Nutshell.new(nutshell_params)
     @nutshell.user = current_user
-
+    binding.pry
     if @nutshell.save
+
       flash[:notice] = "Sounds like a great idea!"
       redirect_to nutshell_path(@nutshell)
     else
@@ -31,7 +32,7 @@ class NutshellsController < ApplicationController
   protected
 
   def nutshell_params
-    params.require(:nutshell).permit(:title, :content)
+    params.require(:nutshell).permit(:title, :content, categorizations_attributes: [])
   end
 end
 

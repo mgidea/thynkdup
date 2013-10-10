@@ -11,24 +11,26 @@ feature "User contextualizes nutshell", %Q{
   # -current users  will be prompted to fill in predetermined list after filling in "nutshell"
   # -Users must provide at least one point of context
   scenario "user selects a contextul category successfully" do
-    idea = FactoryGirl.build(:nutshell)
-    user = idea.user
+    category = FactoryGirl.create(:category)
+    category2 = FactoryGirl.create(:category, name: 'music')
+    category3 = FactoryGirl.create(:category, name: 'politics')
+    user = FactoryGirl.create(:user)
+    idea = FactoryGirl.build(:nutshell, user: user)
     idea_count = user.nutshells.count
-    # prev_count = idea.categorizations.count
+
     sign_in_as(user)
     visit new_nutshell_path
     fill_in "Title", with: idea.title
     fill_in "Content", with: idea.content
-    select "art", from: "Context of Thynkdup"
+    page.check('art')
+    page.check('music')
+    page.check('politics')
 
     click_button "Create Thynkdup"
 
-    expect(idea.categorizations.count).to eql(prev_count + 1)
-    expect(user.nutshells.count).to eql(idea_count + 1)
+    expect(page).to have_content "art"
+    expect(page).to have_content "music"
+    expect(page).to have_content "politics"
     expect(page).to have_content "Sounds like a great idea!"
   end
-
-
 end
-
-
