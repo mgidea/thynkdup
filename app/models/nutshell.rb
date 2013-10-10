@@ -6,4 +6,10 @@ class Nutshell < ActiveRecord::Base
 
   belongs_to :user,
     inverse_of: :nutshells
+
+  has_many :categorizations,
+    inverse_of: :nutshell
+
+  has_many :categories,
+    through: :categorizations
 end

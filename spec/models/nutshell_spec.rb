@@ -8,5 +8,9 @@ describe Nutshell do
   it { should_not have_valid(:content).when(nil, " ", "I" * 81) }
 
   it { should     have_valid(:user).when(User.new) }
+  it { should_not have_valid(:user).when(nil) }
+
   it { should belong_to(:user) }
+  it { should belong_to(:categorization) }
+
 end

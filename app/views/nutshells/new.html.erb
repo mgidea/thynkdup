@@ -1,5 +1,6 @@
 <%= simple_form_for @nutshell do |f| %>
   <%=f.input :title %>
   <%=f.input :content %>
-  <%=f.submit %>
+  <%=f.select :categorization, "Context of Thynkdup" %>
+  <%=f.submit "Create Thynkdup"%>
 <% end %>
