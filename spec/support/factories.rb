@@ -3,8 +3,8 @@ FactoryGirl.define do
     sequence(:email) {|n| "email#{n}@factory.com" }
     password "password"
     password_confirmation "password"
-    first_name "Tom"
-    last_name "Corley"
+    sequence(:first_name) {|n| "Tom#{n}"}
+    sequence(:last_name) {|n| "Corley#{n}"}
   end
 
   factory :nutshell do
@@ -14,6 +14,6 @@ FactoryGirl.define do
   end
 
   factory :category do
-    name "art"
+    sequence(:name) {|n| "art#{n}"}
   end
 end
