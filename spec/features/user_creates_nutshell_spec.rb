@@ -27,7 +27,7 @@ feature "User creates nutshell", %Q{
     visit new_nutshell_path
     fill_in "Title", with: idea.title
     fill_in "Content", with: idea.content
-    click_button "Create Nutshell"
+    click_button "Create Thynkdup"
     expect(page).to have_content "Sounds like a great idea!"
     expect(Nutshell.count).to eql(prev_count + 1)
     expect(page).to have_content idea.content
@@ -41,7 +41,7 @@ feature "User creates nutshell", %Q{
     fill_in "Password", with: person.password
     click_button "Sign In"
     visit new_nutshell_path
-    click_button "Create Nutshell"
+    click_button "Create Thynkdup"
 
     expect(page).to have_content "can't be blank"
     expect(Nutshell.count).to eql(prev_count)
@@ -52,7 +52,7 @@ feature "User creates nutshell", %Q{
     visit new_nutshell_path
     fill_in "Title", with: idea.title
     fill_in "Content", with: idea.content
-    click_button "Create Nutshell"
+    click_button "Create Thynkdup"
 
     expect(page).to have_content "You must be logged in"
     expect(Nutshell.count).to eql(prev_count)
