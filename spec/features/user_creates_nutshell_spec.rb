@@ -18,12 +18,9 @@ feature "User creates nutshell", %Q{
 
 
   scenario "User creates nutshell" do
+    user = FactoryGirl.create(:user)
     prev_count = Nutshell.count
-    visit root_path
-    visit new_user_session_path
-    fill_in "Email", with: person.email
-    fill_in "Password", with: person.password
-    click_button "Sign In"
+    sign_in_as(user)
     visit new_nutshell_path
     fill_in "Title", with: idea.title
     fill_in "Content", with: idea.content
@@ -34,12 +31,9 @@ feature "User creates nutshell", %Q{
   end
 
   scenario "User fails to create Nutshell" do
+    user = FactoryGirl.create(:user)
+    sign_in_as(user)
     prev_count = Nutshell.count
-    visit root_path
-    visit new_user_session_path
-    fill_in "Email", with: person.email
-    fill_in "Password", with: person.password
-    click_button "Sign In"
     visit new_nutshell_path
     click_button "Create Thynkdup"
 
@@ -48,14 +42,9 @@ feature "User creates nutshell", %Q{
   end
 
   scenario "User attempts to create nutshell unauthenticated" do
-    prev_count = Nutshell.count
     visit new_nutshell_path
-    fill_in "Title", with: idea.title
-    fill_in "Content", with: idea.content
-    click_button "Create Thynkdup"
-
-    expect(page).to have_content "You must be logged in"
-    expect(Nutshell.count).to eql(prev_count)
+    expect(page).to have_content "You must be logged in to view this page"
+    expect(page).to_not have_content "Title", "Content"
   end
 end
 
