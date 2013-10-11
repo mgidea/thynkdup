@@ -1,8 +1,6 @@
 <%= simple_form_for @nutshell do |f| %>
   <%=f.input :title %>
   <%=f.input :content %>
-  <%= f.simple_fields_for :categorizations do |c| %>
-    <%= c.association :category, label: "Context of Thynkdup", as: :check_boxes, include_blank: true %>
-  <% end %>
+  <%= f.association :categories, as: :check_boxes, label: 'Context of Thynkdup' %>
   <%=f.submit "Create Thynkdup"%>
 <% end %>

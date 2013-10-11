@@ -12,7 +12,6 @@ class NutshellsController < ApplicationController
   def create
     @nutshell = Nutshell.new(nutshell_params)
     @nutshell.user = current_user
-    binding.pry
     if @nutshell.save
 
       flash[:notice] = "Sounds like a great idea!"
@@ -32,7 +31,7 @@ class NutshellsController < ApplicationController
   protected
 
   def nutshell_params
-    params.require(:nutshell).permit(:title, :content, categorizations_attributes: [])
+    params.require(:nutshell).permit(:title, :content, :category_ids => [])
   end
 end
 
