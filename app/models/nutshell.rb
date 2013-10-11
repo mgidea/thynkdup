@@ -15,8 +15,4 @@ class Nutshell < ActiveRecord::Base
 
   has_many :categories,
     through: :categorizations
-
-  def nutshell_owner?(user)
-    pluck(:user_id).include?(user.id)
-  end
 end
