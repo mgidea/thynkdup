@@ -15,6 +15,4 @@ class Nutshell < ActiveRecord::Base
 
   has_many :categories,
     through: :categorizations
-
-
 end

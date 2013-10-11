@@ -13,14 +13,14 @@ class NutshellsController < ApplicationController
     @nutshell = Nutshell.new(nutshell_params)
     @nutshell.user = current_user
     if @nutshell.save
-
       flash[:notice] = "Sounds like a great idea!"
       redirect_to nutshell_path(@nutshell)
     else
       if current_user == nil
         flash[:notice] = "You must be logged in"
+        redirect_to "pages/index"
       end
-      render "new"
+    render "new"
     end
   end
 
@@ -34,6 +34,7 @@ class NutshellsController < ApplicationController
     params.require(:nutshell).permit(:title, :content, :category_ids => [])
   end
 end
+
 
 
 

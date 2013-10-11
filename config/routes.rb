@@ -1,7 +1,6 @@
 Thynkdup::Application.routes.draw do
 
   resources :nutshells do
-    resources :contextualizations
     resources :notes
   end
 

@@ -1,6 +1,6 @@
 <div>
   <% @nutshells.each do |nutshell| %>
-    <%= link_to nutshell.title, nutshell_path %>
+    <%= link_to nutshell.title, nutshell_path(nutshell) %> |
     <%= nutshell.content %>
   <% end %>
 </div>
