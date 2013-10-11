@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
-    has_many :nutshells,
-      inverse_of: :user
+  has_many :nutshells,
+    inverse_of: :user
 
   validates_presence_of :first_name
   validates_presence_of :last_name

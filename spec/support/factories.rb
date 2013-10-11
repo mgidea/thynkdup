@@ -6,12 +6,14 @@ FactoryGirl.define do
     first_name "Tom"
     last_name "Corley"
   end
-end
 
-FactoryGirl.define do
   factory :nutshell do
     sequence(:title) {|n|"nutshell name#{n}"}
     content "I want to make nutshells"
     user
+  end
+
+  factory :category do
+    name "art"
   end
 end

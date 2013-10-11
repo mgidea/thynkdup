@@ -1,1 +1,9 @@
-<p><%= @nutshell.content %></p>
+<% @nutshell.user.nutshells.each do |nutshell| %>
+  <div class ="nutshell-title">Title: <%= nutshell.title %></div>
+  <div class ="nutshell-content"><%= nutshell.content %></div>
+
+  <% nutshell.categories.each do |category| %>
+    <div><%= category.name %></div>
+  <% end %>
+<% end %>
+

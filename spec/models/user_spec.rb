@@ -7,6 +7,8 @@ describe User do
   it { should     have_valid(:last_name).when("Corley","ANDERSON") }
   it { should_not have_valid(:last_name).when(nil," ") }
 
+  it {should have_many :nutshells}
+
   it "has matching password and password confirmation" do
     prev_count = User.count
     user = User.new
