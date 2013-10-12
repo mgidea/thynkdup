@@ -1,7 +1,7 @@
 <% if current_user != nil %>
-  <% if current_user != nil && @note.user == current_user %>
-    <%= simple_form_for @note do |f| %>
-      <%=f.input :content %>
+  <% if current_user != nil && @nutshell.user == current_user %>
+    <%= simple_form_for [@nutshell, @note] do |f| %>
+      <%=f.input :content, label: "Note" %>
       <%=f.submit "Update Your Thynkdup note"%>
     <% end %>
   <% else %>

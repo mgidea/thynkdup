@@ -17,7 +17,12 @@
     </div>
     <div>
       If you would like to develop your idea further
-      <%= link_to "Write a New Note", new_nutshell_note_path(@nutshell, @note) %>
+      <%= link_to "Write a New Note", new_nutshell_note_path(@nutshell, @note) %><br>
+      <div>
+        <% @nutshell.notes.each do |note| %>
+          <%= note.content %>
+        <% end %>
+      </div>
     </div>
   <% else %>
   <div>

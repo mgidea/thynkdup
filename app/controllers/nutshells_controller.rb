@@ -32,7 +32,7 @@ class NutshellsController < ApplicationController
 
   def show
     @nutshell = Nutshell.find(params[:id])
-    @note = @nutshell.notes.build
+    @note = Note.new
   end
 
   def update
@@ -43,6 +43,7 @@ class NutshellsController < ApplicationController
         redirect_to nutshell_path(@nutshell)
       else
         render "new"
+        @note = Note.new
       end
     end
   end
