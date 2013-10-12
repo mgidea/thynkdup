@@ -15,6 +15,10 @@
         <% end %>
       <% end %>
     </div>
+    <div>
+      If you would like to develop your idea further
+      <%= link_to "Write a New Note", new_nutshell_note_path(@nutshell) %>
+    </div>
   <% else %>
   <div>
     This is not your <%= link_to "Thynkdup", nutshells_path %>
