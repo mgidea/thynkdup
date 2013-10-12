@@ -12,5 +12,5 @@ describe Nutshell do
 
   it { should belong_to :user }
   it { should have_many :categorizations }
-
+  it { should have_many :notes}
 end

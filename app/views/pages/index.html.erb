@@ -1,0 +1,10 @@
+<div>
+  <% if current_user != nil %>
+    <% if current_user.nutshells.empty? %>
+      <h1><%= link_to "Create Your First Thynkdup", new_nutshell_path %></h1>
+    <% else %>
+      <h1><%= link_to "Create New Thynkdup", new_nutshell_path %></h1>
+      <div><%= link_to "View Your Thynkdups", nutshells_path %></div>
+    <% end %>
+  <% end %>
+</div>
