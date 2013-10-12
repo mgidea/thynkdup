@@ -32,6 +32,7 @@ class NutshellsController < ApplicationController
 
   def show
     @nutshell = Nutshell.find(params[:id])
+    @note = @nutshell.notes.build
   end
 
   def update

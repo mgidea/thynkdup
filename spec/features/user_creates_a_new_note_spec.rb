@@ -35,7 +35,7 @@ feature "User creates a new note", %{
     note = FactoryGirl.build(:note)
     prev_count = idea.notes.count
     sign_in_as(user)
-    visit nutshell_path(idea)
+    visit nutshell_path(idea, note)
     click_link "Write a New Note"
     click_button "Save"
 

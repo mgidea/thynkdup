@@ -5,7 +5,7 @@ class NotesController < ApplicationController
 
   def new
     @nutshell = Nutshell.find(params[:nutshell_id])
-    @note = @nutshell.notes.build
+    @note = Note.new
   end
 
   def create

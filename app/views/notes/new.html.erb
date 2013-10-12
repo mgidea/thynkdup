@@ -1,0 +1,12 @@
+<% if current_user != nil %>
+  <%= simple_form_for [@nutshell, @note] do |f| %>
+    <%=f.input :content %>
+    <%=f.submit "Save"%>
+  <% end %>
+<% else %>
+  <div>
+    You must be logged in to view this page
+    <%= link_to "Sign Up", new_user_registration_path %> |
+    <%= link_to "Login", new_user_session_path %>
+  </div>
+<% end %>
