@@ -1,18 +1,10 @@
-<% if current_user != nil %>
-  <% if current_user != nil && @nutshell.user == current_user %>
-    <%= simple_form_for [@nutshell, @note] do |f| %>
-      <%=f.input :content, label: "Note" %>
-      <%=f.submit "Update Your Thynkdup note"%>
-    <% end %>
-  <% else %>
-  <div>
-    This is not your <%= link_to "Thynkdup", nutshells_path %>
-  </div>
+<% if @nutshell.user == current_user %>
+  <%= simple_form_for [@nutshell, @note] do |f| %>
+    <%=f.input :content, label: "Note" %>
+    <%=f.submit "Update Your Thynkdup note"%>
   <% end %>
 <% else %>
-  <div>
-    You must be logged in to view this page
-    <%= link_to "Sign Up", new_user_registration_path %> |
-    <%= link_to "Login", new_user_session_path %>
-  </div>
+<div>
+  This is not your <%= link_to "Thynkdup", nutshells_path %>
+</div>
 <% end %>

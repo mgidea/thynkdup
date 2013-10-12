@@ -1,14 +1,6 @@
-<% if current_user != nil %>
-  <%= simple_form_for @nutshell do |f| %>
-    <%=f.input :title %>
-    <%=f.input :content %>
-    <%=f.association :categories, as: :check_boxes, label: 'Context of Thynkdup' %>
-    <%=f.submit "Create Thynkdup"%>
-  <% end %>
-<% else %>
-  <div>
-    You must be logged in to view this page
-    <%= link_to "Sign Up", new_user_registration_path %> |
-    <%= link_to "Login", new_user_session_path %>
-  </div>
+<%= simple_form_for @nutshell do |f| %>
+  <%=f.input :title %>
+  <%=f.input :content %>
+  <%=f.association :categories, as: :check_boxes, label: 'Context of Thynkdup' %>
+  <%=f.submit "Create Thynkdup"%>
 <% end %>
