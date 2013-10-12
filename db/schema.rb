@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131008210222) do
+ActiveRecord::Schema.define(version: 20131012141920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20131008210222) do
   create_table "categorizations", force: true do |t|
     t.integer  "nutshell_id", null: false
     t.integer  "category_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notes", force: true do |t|
+    t.text     "content",     null: false
+    t.integer  "nutshell_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

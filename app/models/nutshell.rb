@@ -15,4 +15,7 @@ class Nutshell < ActiveRecord::Base
 
   has_many :categories,
     through: :categorizations
+
+  has_many :notes,
+    inverse_of: :nutshell
 end
