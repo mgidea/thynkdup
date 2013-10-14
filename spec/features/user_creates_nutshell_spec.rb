@@ -43,7 +43,7 @@ feature "User creates nutshell", %Q{
 
   scenario "User attempts to create nutshell unauthenticated" do
     visit new_nutshell_path
-    expect(page).to have_content "You must be logged in to view this page"
+    expect(page).to have_content "Please Sign Up or Login if you want to view this page."
     expect(page).to_not have_content "Title", "Content"
   end
 end

@@ -1,29 +1,32 @@
-<% if current_user != nil %>
-  <% if current_user != nil && @nutshell.user == current_user %>
-    <div class ="nutshell-title">
-      <strong>Title: </strong> <%= @nutshell.title %> |
-      <%= link_to "Update Your Thynkdup", edit_nutshell_path(@nutshell) %> |
-      <%= link_to "Delete Your Thynkdup", @nutshell, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
-    <div class ="nutshell-content"><strong>Thynkdup: </strong><%= @nutshell.content %></div>
+<% if @nutshell.user == current_user %>
+  <div class ="nutshell-title">
+    <strong>Title: </strong> <%= @nutshell.title %> |
+    <%= link_to "Update Your Thynkdup", edit_nutshell_path(@nutshell) %> |
+    <%= link_to "Delete Your Thynkdup", @nutshell, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+  <div class ="nutshell-content"><strong>Thynkdup: </strong><%= @nutshell.content %></div>
+  <div>
+    <% @nutshell.categories.each do |category| %>
+      <% if category == @nutshell.categories[-1] %>
+        <%= category.name %>
+      <% else %>
+        <%= category.name + " | " %>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    If you would like to develop your idea further
+    <%= link_to "Write a New Note", new_nutshell_note_path(@nutshell, @note) %><br>
     <div>
-      <% @nutshell.categories.each do |category| %>
-        <% if category == @nutshell.categories[-1] %>
-          <%= category.name %>
-        <% else %>
-          <%= category.name + " | " %>
-        <% end %>
+      <% @nutshell.notes.each do |note| %>
+        <%= note.content %>
       <% end %>
     </div>
-  <% else %>
+  </div>
+<% else %>
   <div>
     This is not your <%= link_to "Thynkdup", nutshells_path %>
   </div>
-  <% end %>
-<% else %>
-  <div>
-    You must be logged in to view this page
-    <%= link_to "Sign Up", new_user_registration_path %> |
-    <%= link_to "Login", new_user_session_path %>
-  </div>
 <% end %>
+
+

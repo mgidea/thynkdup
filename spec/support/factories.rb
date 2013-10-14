@@ -16,4 +16,9 @@ FactoryGirl.define do
   factory :category do
     sequence(:name) {|n| "art#{n}"}
   end
+
+  factory :note do
+    sequence(:content) {|n| "I am going to make #{n} more note(s)"}
+    nutshell
+  end
 end

@@ -1,11 +1,8 @@
 class NutshellsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
-    if current_user != nil
-      @nutshells = current_user.nutshells
-    else
-      redirect_to :root
-    end
+    @nutshells = current_user.nutshells
   end
 
   def edit
@@ -32,6 +29,7 @@ class NutshellsController < ApplicationController
 
   def show
     @nutshell = Nutshell.find(params[:id])
+    @note = Note.new
   end
 
   def update
@@ -41,7 +39,7 @@ class NutshellsController < ApplicationController
         flash[:notice] = "Your Thynkdup has been Updated"
         redirect_to nutshell_path(@nutshell)
       else
-        render "new"
+        render "edit"
       end
     end
   end
@@ -56,8 +54,16 @@ class NutshellsController < ApplicationController
   end
 
   protected
+
   def nutshell_params
     params.require(:nutshell).permit(:title, :content, :category_ids => [])
+  end
+
+  def logged_in?
+    if current_user == nil
+      flash[:notice] = "You must be logged in to view this page"
+      redirect_to root_path
+    end
   end
 end
 

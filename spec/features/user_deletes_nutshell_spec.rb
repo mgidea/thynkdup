@@ -42,7 +42,7 @@ feature "User deletes a nutshell", %Q{
 
       visit nutshell_path(idea)
       expect(page).to_not have_content "Delete Thynkdup"
-      expect(page).to have_content "You must be logged in to view this page"
+      expect(page).to have_content "Please Sign Up or Login if you want to view this page."
     end
   end
 end
