@@ -9,6 +9,11 @@ class NotesController < ApplicationController
     @note = @nutshell.notes.build
   end
 
+  def edit
+    @nutshell = Nutshell.find(params[:nutshell_id])
+    @note = Note.find(params[:id])
+  end
+
   def create
     @nutshell = Nutshell.find(params[:nutshell_id])
     @note = @nutshell.notes.build(note_params)
@@ -22,11 +27,24 @@ class NotesController < ApplicationController
     end
   end
 
+  def update
+    @nutshell = Nutshell.find(params[:nutshell_id])
+    @note = Note.find(params[:id])
+    if @nutshell.user == current_user
+      if @note.update(note_params)
+        flash[:notice] = "Your Note has been Updated"
+        redirect_to nutshell_path(@nutshell)
+      else
+        render 'edit'
+      end
+    end
+  end
+
   def show
   end
 
 protected
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :title)
   end
 end

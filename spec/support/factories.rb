@@ -18,7 +18,8 @@ FactoryGirl.define do
   end
 
   factory :note do
-    sequence(:content) {|n| "I am going to make #{n} more note(s)"}
+    sequence(:title) {|n| "name#{n}"}
+    content "I am going to make more note"
     nutshell
   end
 end
