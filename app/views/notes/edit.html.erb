@@ -1,4 +1,5 @@
 <% if @nutshell.user == current_user %>
+  <div><strong>Update Your Note:</strong></div>
   <%= simple_form_for [@nutshell, @note] do |f| %>
     <%=f.input :title  %>
     <%=f.input :content, label: "Note" %>

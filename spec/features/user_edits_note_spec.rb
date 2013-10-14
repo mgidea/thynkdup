@@ -11,6 +11,7 @@ feature "User edits nutshell", %Q{
 # * If an unauthenticated user attempts to view the page they will be redirected to sign in
 # * If the wrong user attempts to update they will be redirected to their page
 # * If it fails to update the user will be notified
+# * User can follow edit link to change existing note
 
   scenario "user successfully updates note" do
     user = FactoryGirl.create(:user)
@@ -43,6 +44,17 @@ feature "User edits nutshell", %Q{
 
     expect(page).to have_content "can't be blank"
     expect(page).to_not have_content "Your Note has been Updated"
+  end
+
+  scenario "User expects to see edit link on nutshell page with notes" do
+    user = FactoryGirl.create(:user)
+    idea = FactoryGirl.create(:nutshell, user: user)
+    note = FactoryGirl.create(:note, nutshell: idea)
+    sign_in_as(user)
+    visit nutshell_path(idea)
+    click_link "Edit Note"
+
+    expect(page).to have_content "Update Your Note:"
   end
 
   context "As an unauthenticated user" do
