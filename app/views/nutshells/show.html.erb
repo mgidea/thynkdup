@@ -23,10 +23,12 @@
         <% @nutshell.notes.each_with_index do |note, index| %>
           <% if note.title != nil %>
             <strong><%= "Title: " + note.title %></strong> |
-            <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %><br>
+            <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %>
+            <%= link_to "Delete Note", nutshell_note_path(@nutshell, note), method: :delete, data: { confirm: 'Are you sure?' } %><br>
           <% else %>
             <strong><%= @nutshell.title + "-Note #{(index + 1).to_s}" %></strong> |
-              <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %><br>
+            <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %> |
+            <%= link_to "Delete Note", nutshell_note_path(@nutshell, note), method: :delete, data: { confirm: 'Are you sure?' } %><br>
           <% end %>
           <%= note.content %><br>
         <% end %>
@@ -38,6 +40,8 @@
     This is not your <%= link_to "Thynkdup", nutshells_path %>
   </div>
 <% end %>
+
+
 
 
 
