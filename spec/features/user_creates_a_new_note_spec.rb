@@ -22,11 +22,13 @@ feature "User creates a new note", %{
     sign_in_as(user)
     visit nutshell_path(idea)
     click_link "Write a New Note"
+    fill_in "Title", with: note.title
     fill_in "Note", with: note.content
     click_button "Save"
 
     expect(idea.notes.count).to eql(prev_count + 1)
     expect(page).to have_content "Your note has been saved"
+    expect(page).to have_content note.content
   end
 
   scenario "user fails to create a note" do
@@ -66,3 +68,5 @@ feature "User creates a new note", %{
     end
   end
 end
+
+
