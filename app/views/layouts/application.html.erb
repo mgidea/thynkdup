@@ -7,20 +7,43 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% flash.each do |name, msg| -%>
+
+<nav class="low-header">
+  <% if user_signed_in? %>
+  <div class= "low-header-container">
+    <ul class="low-header-list-left">
+      <li><%= link_to 'My Thynkdups', nutshells_path %></li>
+      <li></li>
+      <li><%= link_to current_user.full_name, '#' %></li>
+      <li></li>
+    </ul>
+    <ul class="low-header-list-right">
+      <li></li>
+      <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+      <li></li>
+      <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+      <li></li>
+      <li><%= link_to 'Create a Thynkdup', new_nutshell_path %></li>
+    </ul>
+  </div>
+</nav>
+    Logged in as <strong><%=current_user.full_name %></strong>.
+  <% else %>
+  <ul class="low-header-list-right">
+     <li></li>
+     <li><%= link_to "Sign Up", new_user_registration_path %></li>
+     <li></li>
+     <li><%= link_to "Login", new_user_session_path %></li>
+  </ul>
+</nav>
+  <% end %>
+<% flash.each do |name, msg| -%>
      <%= content_tag :div, msg, class: name %>
    <% end -%>
-
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %> |
-  <%= link_to 'Create a Thynkdup', new_nutshell_path %>
-<% else %>
-   <%= link_to "Sign Up", new_user_registration_path %> |
-   <%= link_to "Login", new_user_session_path %>
-<% end %>
 <%= yield %>
 
 </body>
 </html>
+
+
+

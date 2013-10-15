@@ -1,0 +1,28 @@
+.low-header {
+  background-color: #FFC581;
+  padding: 12px 0;
+}
+
+.low-header-container {
+  width: 100%;
+
+}
+
+.low-header-list-left {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+.low-header-list-right {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+  float: right;
+}
+
+.low-header li {
+  display: inline;
+}
