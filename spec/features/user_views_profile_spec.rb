@@ -21,7 +21,7 @@ feature "user views a profile", %Q{
     FactoryGirl.create_list(:note, 3, nutshell: idea)
     sign_in_as(user)
     visit profile_path(profile)
-    save_and_open_page
+
     expect(page).to have_content profile.occupation, profile.goals
     expect(page).to have_content profile.user.full_name
     expect(page).to have_content profile.user.nutshells.first.title
