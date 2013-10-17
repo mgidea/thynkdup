@@ -25,7 +25,13 @@
                 <li class="col span_1_of_7"><%= link_to "DEMO", pages_demo_path %></li>
               <% if user_signed_in? %>
                 <li class="col span_1_of_7"><%=link_to 'MY THYNKDUPS',nutshells_path%></li>
-                <li class="col span_1_of_7"><%=link_to current_user.full_name.upcase, pages_profile_path %></li>
+                <li class="col span_1_of_7">
+                  <% if current_user.profiles.count > 0 %>
+                    <%=link_to current_user.full_name.upcase, profile_path(current_user.profiles.first) %>
+                  <% else %>
+                    <%=link_to current_user.full_name.upcase, new_profile_path %>
+                  <% end %>
+                </li>
                 <li class="col span_1_of_7"><%=link_to "LOGOUT", destroy_user_session_path, method: :delete%></li>
               <% else %>
                 <li class="col span_1_of_7"></li>
@@ -45,7 +51,7 @@
               <li></li>
             </ul>
             <ul class="low-header-list-right">
-              <li><%=link_to 'Edit profile', edit_user_registration_path%></li>
+              <li><%=link_to 'Edit Login Info', edit_user_registration_path%></li>
               <li><%=link_to 'Create a Thynkdup', new_nutshell_path%></li>
             </ul>
           </div>

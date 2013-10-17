@@ -7,6 +7,10 @@ class ProfilesController < ApplicationController
   def new
     @user = current_user
     @profile = Profile.new
+    if current_user.nutshells.empty?
+      flash[:notice] = "You must create a nutshell before working on a profile"
+      redirect_to new_nutshell_path(current_user)
+    end
   end
 
   def create
