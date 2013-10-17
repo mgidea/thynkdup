@@ -15,6 +15,7 @@ feature "user edits their profile", %Q{
   let(:user) {FactoryGirl.create(:user)}
   let!(:idea) {FactoryGirl.create(:nutshell, user: user)}
   let!(:profile) {FactoryGirl.create(:profile, user: user)}
+
   scenario "authenticated user successfully edits their profile" do
     prev_count = Profile.count
     sign_in_as(user)
@@ -22,13 +23,14 @@ feature "user edits their profile", %Q{
     fill_in "Goals", with: "Life-Long success"
     click_button "Update Profile"
 
-    expect(page).to have_content "You successfully updated your profile"
+    expect(page).to have_content "Your Profile has been updated"
     expect(page).to have_content "Life-Long success"
     expect(Profile.count).to eql(prev_count)
   end
 
   scenario "authenticated non-author can not edit authors profile" do
     user2 = FactoryGirl.create(:user)
+    sign_in_as(user2)
     visit edit_profile_path(profile)
 
     expect(page).to have_content "This is the Public Version"
@@ -40,8 +42,7 @@ feature "user edits their profile", %Q{
     scenario "user can not edit a profile" do
     visit edit_profile_path(profile)
 
-    expect(page).to have_content "This is the Public Version"
-    expect(page).to have_content "You are not the owner of this profile"
+    expect(page).to have_content "Please Sign Up or Login if you want to view this page"
     expect(page).to_not have_content "Update"
     end
   end

@@ -35,12 +35,16 @@ class ProfilesController < ApplicationController
 
   def edit
     @profile = Profile.find(params[:id])
+    if @profile.user != current_user
+      flash[:notice] = "You are not the owner of this profile"
+      render 'public'
+    end
   end
 
   def update
     @profile = Profile.find(params[:id])
     if @profile.update(profile_params)
-      flash[:notice] = "Your Profie has been updated"
+      flash[:notice] = "Your Profile has been updated"
       redirect_to profile_path(@profile)
     else
       render 'edit'
@@ -48,10 +52,11 @@ class ProfilesController < ApplicationController
   end
 
   def destroy
+    @profile = Profile.find(params[:id])
     if @profile.user == current_user
       @profile.delete
       flash[:notice] = "You just deleted your profile.  Follow the link to add profile to create a new one"
-      redirect_to nutshell_path(current_user)
+      redirect_to nutshells_path
     end
   end
 

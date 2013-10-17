@@ -49,7 +49,7 @@ feature "user creates a profile", %Q{
     sign_in_as(another)
     visit new_profile_path
     click_button "Create Profile"
-    save_and_open_page
+
     expect(page).to have_content "You must create a nutshell before working on a profile"
     expect(page).to_not have_content "Occupation"
   end
