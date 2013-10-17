@@ -19,13 +19,13 @@
           <nav class="main-header">
             <div class= "main-header-container section group">
               <ul class="main-header-list">
-                <li class="col span_1_of_7"><%= link_to "WHAT", '#' %></li>
-                <li class="col span_1_of_7"><%= link_to "WHO", '#' %></li>
-                <li class="col span_1_of_7"><%= link_to "HOW", '#' %></li>
-                <li class="col span_1_of_7"><%= link_to "DEMO", '#' %></li>
+                <li class="col span_1_of_7"><%= link_to "WHAT", pages_what_path %></li>
+                <li class="col span_1_of_7"><%= link_to "WHO", pages_who_path %></li>
+                <li class="col span_1_of_7"><%= link_to "HOW", pages_how_path %></li>
+                <li class="col span_1_of_7"><%= link_to "DEMO", pages_demo_path %></li>
               <% if user_signed_in? %>
                 <li class="col span_1_of_7"><%=link_to 'MY THYNKDUPS',nutshells_path%></li>
-                <li class="col span_1_of_7"><%=link_to current_user.full_name.upcase,'#'%></li>
+                <li class="col span_1_of_7"><%=link_to current_user.full_name.upcase, pages_profile_path %></li>
                 <li class="col span_1_of_7"><%=link_to "LOGOUT", destroy_user_session_path, method: :delete%></li>
               <% else %>
                 <li class="col span_1_of_7"></li>
@@ -62,10 +62,10 @@
         <nav class="bottom-nav">
           <div class= "bottom-nav-container section group">
           <ul class="bottom-nav-list">
-            <li class="col span_1_of_4"><%= link_to "CONTACT", '#' %></li>
-            <li class="col span_1_of_4"><%= link_to "ABOUT", '#' %></li>
+            <li class="col span_1_of_4"><%= link_to "CONTACT", pages_contact_path %></li>
+            <li class="col span_1_of_4"><%= link_to "ABOUT", pages_about_path %></li>
             <li class="col span_1_of_4"><%= link_to "FOLLOW", '#' %></li>
-            <li clas="col span_1_of_4"><%= link_to "FAQ", '#' %></li>
+            <li class="col span_1_of_4"><%= link_to "FAQ", pages_faq_path %></li>
           </ul>
         </div>
         </nav>

@@ -16,7 +16,7 @@ feature "user signs up", %Q{
   scenario "user signs up succesfully" do
     email = "tom@corley.com"
     visit root_path
-    click_link "Sign Up"
+    click_link "SIGN UP"
 
     fill_in "Email", with: email
     fill_in("Password", with: 'password', :match => :prefer_exact)
@@ -32,7 +32,7 @@ feature "user signs up", %Q{
   scenario "User does not sign up successfully" do
     prev_count = User.count
     visit root_path
-    click_link "Sign Up"
+    click_link "SIGN UP"
     click_button "Sign Up"
     expect(page).to have_content "can't be blank"
     expect(User.count).to eql(prev_count)
@@ -41,7 +41,7 @@ feature "user signs up", %Q{
   scenario "User has non-matching password and password confirmation" do
     email = "tom@corley.com"
     visit root_path
-    click_link "Sign Up"
+    click_link "SIGN UP"
     fill_in "Email", with: email
     fill_in("Password", with: 'password', :match => :prefer_exact)
     fill_in("Password Confirmation", with: 'different', :match => :prefer_exact)

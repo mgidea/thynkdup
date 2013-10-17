@@ -10,4 +10,5 @@ describe Note do
   it { should     have_valid(:title).when("New", "OLD", " ", nil) }
 
   it { should belong_to :nutshell}
+  it { should have_many(:users).through(:nutshell)}
 end

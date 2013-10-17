@@ -5,6 +5,6 @@ class Note < ActiveRecord::Base
   belongs_to :nutshell,
     inverse_of: :notes
 
-  has_one :user,
+  has_many :users,
     through: :nutshell
 end
