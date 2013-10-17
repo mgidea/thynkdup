@@ -1,10 +1,20 @@
 Thynkdup::Application.routes.draw do
+  resources :profiles
 
   resources :nutshells do
     resources :notes
   end
 
   devise_for :users
+  get "profiles/:id/public" => "profiles#public", as: :public
+  get "pages/about"
+  get "pages/how"
+  get "pages/contact"
+  get "pages/demo"
+  get "pages/who"
+  get "pages/what"
+  get "pages/faq"
+  get "pages/profile"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

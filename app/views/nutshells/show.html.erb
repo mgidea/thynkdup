@@ -2,7 +2,11 @@
   <div class ="nutshell-title">
     <strong>Title: </strong> <%= @nutshell.title %> |
     <%= link_to "Update Your Thynkdup", edit_nutshell_path(@nutshell) %> |
-    <%= link_to "Delete Your Thynkdup", @nutshell, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to "Delete Your Thynkdup", @nutshell, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <% if current_user.profiles.count == 0 %>
+      <%= link_to "Create Your Profile", new_profile_path %>
+    <% else %>
+      <%= link_to "View Your Profile", profile_path(current_user.profiles.first) %>
   </div>
   <div class ="nutshell-content"><strong>Thynkdup: </strong><%= @nutshell.content %></div>
   <div>
