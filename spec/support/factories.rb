@@ -22,4 +22,14 @@ FactoryGirl.define do
     content "I am going to make more note"
     nutshell
   end
+
+  factory :profile do
+    sequence(:occupation) {|n| "job#{n}"}
+    interests "Sports"
+    inspirations "DHH"
+    aspirations "Peace"
+    goals "Happiness"
+    recommendations "1984"
+    user
+  end
 end

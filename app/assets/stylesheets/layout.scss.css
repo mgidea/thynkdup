@@ -1,0 +1,91 @@
+a {
+  text-decoration: none;
+  color: #7E6B94;
+}
+
+.main-header {
+  background-color: #CFFFCF;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #CFFFCF;
+  height: 100%;
+}
+
+.everything {
+  min-height: 100%;
+  position: relative;
+}
+
+.upper-header {
+  border: 5px solid #E83D37;
+  border-bottom: 3px solid #E83D37;
+}
+
+.main-header li {
+  text-align: center;
+}
+
+.low-header {
+  background-color: #CFFFCF;
+  padding-bottom: 20px;
+}
+
+.low-header-container {
+  width: 100%;
+
+}
+
+.low-header-list-left {
+  list-style: none;
+  padding: 0;
+  margin-left: 0.5em;
+  display: inline-block;
+}
+
+.low-header-list-right {
+  list-style: none;
+  padding: 0;
+  margin-right: 0.5em;
+  text-align: right;
+  float: right;
+}
+
+.low-header li {
+  display: inline;
+  padding: 0 0.5em;
+}
+
+.thynkdup-container {
+  width: 100%;
+  background-color: #CFFFCF;
+}
+.thynkdup-logo {
+  font-size: 4em;
+  text-align: center;
+}
+
+.slogan {
+  text-align: center;
+}
+
+.content {
+  padding: 10px;
+  padding-bottom: 60px;
+}
+
+.bottom-nav {
+  text-align: center;
+  border: 1px solid black;
+}
+
+.da-bottom {
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  left: 0;
+}
+

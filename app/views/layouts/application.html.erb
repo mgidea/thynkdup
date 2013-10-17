@@ -1,26 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Thynkdup</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <% flash.each do |name, msg| -%>
-     <%= content_tag :div, msg, class: name %>
-   <% end -%>
+  <head>
+    <title>Thynkdup</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="everything">
+      <div class="main">
+        <div class="upper-header">
+          <header>
+            <div class="thynkdup-container">
+              <div class="thynkdup-logo"><strong>thynkdup.</strong></div>
+              <div class="slogan"><span>a network of ideas</span></div>
+            </div>
+          </header>
+          <nav class="main-header">
+            <div class= "main-header-container section group">
+              <ul class="main-header-list">
+                <li class="col span_1_of_7"><%= link_to "WHAT", pages_what_path %></li>
+                <li class="col span_1_of_7"><%= link_to "WHO", pages_who_path %></li>
+                <li class="col span_1_of_7"><%= link_to "HOW", pages_how_path %></li>
+                <li class="col span_1_of_7"><%= link_to "DEMO", pages_demo_path %></li>
+              <% if user_signed_in? %>
+                <li class="col span_1_of_7"><%=link_to 'MY THYNKDUPS',nutshells_path%></li>
+                <li class="col span_1_of_7">
+                  <% if current_user.profiles.count > 0 %>
+                    <%=link_to current_user.full_name.upcase, profile_path(current_user.profiles.first) %>
+                  <% else %>
+                    <%=link_to current_user.full_name.upcase, new_profile_path %>
+                  <% end %>
+                </li>
+                <li class="col span_1_of_7"><%=link_to "LOGOUT", destroy_user_session_path, method: :delete%></li>
+              <% else %>
+                <li class="col span_1_of_7"></li>
+                <li class="col span_1_of_7"><%=link_to "SIGN UP", new_user_registration_path%></li>
+                <li class="col span_1_of_7"><%=link_to "LOGIN", new_user_session_path%></li>
+              <% end %>
 
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %> |
-  <%= link_to 'Create a Thynkdup', new_nutshell_path %>
-<% else %>
-   <%= link_to "Sign Up", new_user_registration_path %> |
-   <%= link_to "Login", new_user_session_path %>
-<% end %>
-<%= yield %>
-
-</body>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <nav class="low-header">
+          <% if user_signed_in? %>
+          <div class"low-header-container">
+            <ul class="low-header-list-left">
+              <li>Logged in as <strong><%=current_user.full_name%></strong>.</li>
+              <li></li>
+            </ul>
+            <ul class="low-header-list-right">
+              <li><%=link_to 'Edit Login Info', edit_user_registration_path%></li>
+              <li><%=link_to 'Create a Thynkdup', new_nutshell_path%></li>
+            </ul>
+          </div>
+        </nav>
+        <% end %>
+      </div>
+      <% flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, class: name %>
+      <% end -%>
+      <div class="content">
+        <%= yield %>
+      </div>
+      <footer class="da-bottom">
+        <nav class="bottom-nav">
+          <div class= "bottom-nav-container section group">
+          <ul class="bottom-nav-list">
+            <li class="col span_1_of_4"><%= link_to "CONTACT", pages_contact_path %></li>
+            <li class="col span_1_of_4"><%= link_to "ABOUT", pages_about_path %></li>
+            <li class="col span_1_of_4"><%= link_to "FOLLOW", '#' %></li>
+            <li class="col span_1_of_4"><%= link_to "FAQ", pages_faq_path %></li>
+          </ul>
+        </div>
+        </nav>
+      </footer>
+    </div>
+  </body>
 </html>
+
+
+
+
+
+
+
+
