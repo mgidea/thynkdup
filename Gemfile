@@ -31,7 +31,8 @@ gem 'devise'
 
 gem 'simple_form'
 
-gem 'cocoon'
+gem 'unicorn'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
