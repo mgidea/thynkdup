@@ -22,3 +22,10 @@ categories.each do |category|
   end
   record.save!
 end
+
+User.all.each do |user|
+  record = User.where(email: user.email).first
+  if record.role.empty?
+    record.assign_attributes(role: "member")
+  end
+end
