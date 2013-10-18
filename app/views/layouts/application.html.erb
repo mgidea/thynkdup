@@ -33,7 +33,7 @@
                 </li>
                 <li class="col span_1_of_7"><%=link_to "LOGOUT", destroy_user_session_path, method: :delete%></li>
               <% else %>
-                <li class="col span_1_of_7"></li>
+                <li class="col span_1_of_7"><%= link_to "PROFILE", pages_profile_path %></li>
                 <li class="col span_1_of_7"><%=link_to "SIGN UP", new_user_registration_path%></li>
                 <li class="col span_1_of_7"><%=link_to "LOGIN", new_user_session_path%></li>
               <% end %>
