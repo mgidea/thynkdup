@@ -67,8 +67,9 @@ body {
   text-align: center;
 }
 
-.slogan {
-  text-align: center;
+.thynkdup-logo img {
+  width: 100%;
+  height: 1.5em;
 }
 
 .content {
