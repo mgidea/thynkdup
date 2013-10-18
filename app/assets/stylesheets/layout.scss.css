@@ -1,16 +1,18 @@
 a {
   text-decoration: none;
-  color: #7E6B94;
+  color: black;
 }
-
+.main-header a{
+  color: white;
+}
 .main-header {
-  background-color: #CFFFCF;
+  background-color: black;
 }
 html,
 body {
   margin: 0;
   padding: 0;
-  background-color: #CFFFCF;
+  background-color: white;
   height: 100%;
 }
 
@@ -20,8 +22,7 @@ body {
 }
 
 .upper-header {
-  border: 5px solid #E83D37;
-  border-bottom: 3px solid #E83D37;
+  border: 5px solid #7E6B94;
 }
 
 .main-header li {
@@ -29,7 +30,7 @@ body {
 }
 
 .low-header {
-  background-color: #CFFFCF;
+  background-color: white;
   padding-bottom: 20px;
 }
 
@@ -60,7 +61,7 @@ body {
 
 .thynkdup-container {
   width: 100%;
-  background-color: #CFFFCF;
+  background-color: black;
 }
 .thynkdup-logo {
   font-size: 4em;
