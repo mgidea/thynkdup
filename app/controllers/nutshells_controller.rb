@@ -1,6 +1,8 @@
 class NutshellsController < ApplicationController
   before_action :authenticate_user!
 
+  before_action :wrong_thynkdup_user, only: [:show, :edit, :update, :delete]
+
   def index
     @nutshells = current_user.nutshells
   end
@@ -34,23 +36,19 @@ class NutshellsController < ApplicationController
 
   def update
     @nutshell = Nutshell.find(params[:id])
-    if @nutshell.user == current_user
-      if @nutshell.update(nutshell_params)
-        flash[:notice] = "Your Thynkdup has been Updated"
-        redirect_to nutshell_path(@nutshell)
-      else
-        render "edit"
-      end
+    if @nutshell.update(nutshell_params)
+      flash[:notice] = "Your Thynkdup has been Updated"
+      redirect_to nutshell_path(@nutshell)
+    else
+      render "edit"
     end
   end
 
   def destroy
     @nutshell = Nutshell.find(params[:id])
-    if @nutshell.user == current_user
-      @nutshell.destroy
-      flash[:notice] = "Your Thynkdup has been Removed.  Let's Work on Some new Ideas."
-      redirect_to nutshells_path
-    end
+    @nutshell.destroy
+    flash[:notice] = "Your Thynkdup has been Removed.  Let's Work on Some new Ideas."
+    redirect_to nutshells_path
   end
 
   protected
@@ -59,10 +57,11 @@ class NutshellsController < ApplicationController
     params.require(:nutshell).permit(:title, :content, :category_ids => [])
   end
 
-  def logged_in?
-    if current_user == nil
-      flash[:notice] = "You must be logged in to view this page"
-      redirect_to root_path
+  def wrong_thynkdup_user
+    @nutshell = Nutshell.find(params[:id])
+    if @nutshell.user != current_user
+      flash[:notice] = "This is not your Thynkdup"
+      redirect_to nutshells_path
     end
   end
 end

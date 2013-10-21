@@ -1,12 +1,6 @@
-<% if @nutshell.user == current_user %>
-  <%= simple_form_for @nutshell do |f| %>
-    <%=f.input :title %>
-    <%=f.input :content %>
-    <%=f.association :categories, as: :check_boxes, label: 'Context of Thynkdup' %>
-    <%=f.submit "Update Your Thynkdup"%>
-  <% end %>
-<% else %>
-  <div>
-    This is not your <%= link_to "Thynkdup", nutshells_path %>
-  </div>
+<%= simple_form_for @nutshell do |f| %>
+  <%=f.input :title %>
+  <%=f.input :content %>
+  <%=f.association :categories, as: :check_boxes, label: 'Context of Thynkdup' %>
+  <%=f.submit "Update Your Thynkdup"%>
 <% end %>
