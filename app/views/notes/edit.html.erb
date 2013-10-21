@@ -1,12 +1,6 @@
-<% if @nutshell.user == current_user %>
-  <div><strong>Update Your Note:</strong></div>
-  <%= simple_form_for [@nutshell, @note] do |f| %>
-    <%=f.input :title  %>
-    <%=f.input :content, label: "Note" %>
-    <%=f.submit "Update Your Note" %>
-  <% end %>
-<% else %>
-<div>
-  This is not your <%= link_to "Thynkdup", nutshells_path %>
-</div>
+<div><strong>Update Your Note:</strong></div>
+<%= simple_form_for [@nutshell, @note] do |f| %>
+  <%=f.input :title  %>
+  <%=f.input :content, label: "Note" %>
+  <%=f.submit "Update Your Note" %>
 <% end %>

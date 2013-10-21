@@ -1,54 +1,41 @@
-<% if @nutshell.user == current_user %>
-  <div class ="nutshell-title">
-    <strong>Title: </strong> <%= @nutshell.title %> |
-    <%= link_to "Update Your Thynkdup", edit_nutshell_path(@nutshell) %> |
-    <%= link_to "Delete Your Thynkdup", @nutshell, method: :delete, data: { confirm: 'Are you sure?' } %> |
-    <% if current_user.profiles.count == 0 %>
-      <%= link_to "Create Your Profile", new_profile_path %>
+<div class ="nutshell-title">
+  <strong>Title: </strong> <%= @nutshell.title %> |
+  <%= link_to "Update Your Thynkdup", edit_nutshell_path(@nutshell) %> |
+  <%= link_to "Delete Your Thynkdup", @nutshell, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <% if current_user.profiles.count == 0 %>
+    <%= link_to "Create Your Profile", new_profile_path %>
+  <% else %>
+    <%= link_to "View Your Profile", profile_path(current_user.profiles.first) %>
+  <% end %>
+</div>
+<div class ="nutshell-content"><strong>Thynkdup: </strong><%= @nutshell.content %></div>
+<div>
+  <% @nutshell.categories.each do |category| %>
+    <% if category == @nutshell.categories[-1] %>
+      <%= category.name %>
     <% else %>
-      <%= link_to "View Your Profile", profile_path(current_user.profiles.first) %>
+      <%= category.name + " | " %>
     <% end %>
-  </div>
-  <div class ="nutshell-content"><strong>Thynkdup: </strong><%= @nutshell.content %></div>
+  <% end %>
+</div>
+<div>
+  If you would like to develop your idea further
+  <%= link_to "Write a New Note", new_nutshell_note_path(@nutshell, @note) %><br>
   <div>
-    <% @nutshell.categories.each do |category| %>
-      <% if category == @nutshell.categories[-1] %>
-        <%= category.name %>
-      <% else %>
-        <%= category.name + " | " %>
-      <% end %>
-    <% end %>
-  </div>
-  <div>
-    If you would like to develop your idea further
-    <%= link_to "Write a New Note", new_nutshell_note_path(@nutshell, @note) %><br>
-    <div>
-      <% if @nutshell.notes.count > 0 %>
-        <div>My Thynkdup Notes</div>
-        <% @nutshell.notes.each_with_index do |note, index| %>
-          <% if note.title != nil %>
-            <strong><%= "Title: " + note.title %></strong> |
-            <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %>
-            <%= link_to "Delete Note", nutshell_note_path(@nutshell, note), method: :delete, data: { confirm: 'Are you sure?' } %><br>
-          <% else %>
-            <strong><%= @nutshell.title + "-Note #{(index + 1).to_s}" %></strong> |
-            <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %> |
-            <%= link_to "Delete Note", nutshell_note_path(@nutshell, note), method: :delete, data: { confirm: 'Are you sure?' } %><br>
-          <% end %>
-          <%= note.content %><br>
+    <% if @nutshell.notes.count > 0 %>
+      <div>My Thynkdup Notes</div>
+      <% @nutshell.notes.each_with_index do |note, index| %>
+        <% if note.title != nil %>
+          <strong><%= "Title: " + note.title %></strong> |
+          <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %>
+          <%= link_to "Delete Note", nutshell_note_path(@nutshell, note), method: :delete, data: { confirm: 'Are you sure?' } %><br>
+        <% else %>
+          <strong><%= @nutshell.title + "-Note #{(index + 1).to_s}" %></strong> |
+          <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %> |
+          <%= link_to "Delete Note", nutshell_note_path(@nutshell, note), method: :delete, data: { confirm: 'Are you sure?' } %><br>
         <% end %>
+        <%= note.content %><br>
       <% end %>
-    </div>
+    <% end %>
   </div>
-<% else %>
-  <div>
-    This is not your <%= link_to "Thynkdup", nutshells_path %>
-  </div>
-<% end %>
-
-
-
-
-
-
-
+</div>
