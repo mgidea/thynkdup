@@ -18,7 +18,6 @@ feature "user deletes a profile", %Q{
 
   scenario "author successfully deletes their profile" do
     sign_in_as(user)
-    binding.pry
     prev_count = user.profiles.count
     visit profile_path(profile)
     click_link "Delete Profile"

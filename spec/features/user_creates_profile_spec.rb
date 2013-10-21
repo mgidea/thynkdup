@@ -48,7 +48,6 @@ feature "user creates a profile", %Q{
     another = FactoryGirl.create(:user)
     sign_in_as(another)
     visit new_profile_path
-    click_button "Create Profile"
 
     expect(page).to have_content "You must create a nutshell before working on a profile"
     expect(page).to_not have_content "Occupation"
