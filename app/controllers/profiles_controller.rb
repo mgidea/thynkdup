@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :public, :index]
 
   def index
@@ -30,7 +31,6 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = Profile.find(params[:id])
     render 'public' if @profile.user != current_user
   end
 
@@ -38,7 +38,6 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = Profile.find(params[:id])
     if @profile.user != current_user
       flash[:notice] = "You are not the owner of this profile"
       render 'public'
@@ -46,7 +45,6 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @profile = Profile.find(params[:id])
     if @profile.update(profile_params)
       flash[:notice] = "Your Profile has been updated"
       redirect_to profile_path(@profile)
@@ -56,7 +54,6 @@ class ProfilesController < ApplicationController
   end
 
   def destroy
-    @profile = Profile.find(params[:id])
     if @profile.user == current_user
       @profile.delete
       flash[:notice] = "You just deleted your profile.  Follow the link to add profile to create a new one"
@@ -64,7 +61,13 @@ class ProfilesController < ApplicationController
     end
   end
 
+  protected
   def profile_params
     params.require(:profile).permit(:occupation, :interests, :inspirations, :aspirations, :goals, :recommendations)
   end
+
+  def set_profile
+    @profile = Profile.find(params[:id])
+  end
+
 end
