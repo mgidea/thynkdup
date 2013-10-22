@@ -1,14 +1,13 @@
 class NutshellsController < ApplicationController
+  before_action :set_nutshell, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
-  before_action :wrong_thynkdup_user, only: [:show, :edit, :update, :delete]
+  before_action :wrong_thynkdup_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @nutshells = current_user.nutshells
   end
 
   def edit
-    @nutshell = Nutshell.find(params[:id])
     @categorizations = @nutshell.categorizations.build
   end
 
@@ -30,12 +29,10 @@ class NutshellsController < ApplicationController
   end
 
   def show
-    @nutshell = Nutshell.find(params[:id])
     @note = Note.new
   end
 
   def update
-    @nutshell = Nutshell.find(params[:id])
     if @nutshell.update(nutshell_params)
       flash[:notice] = "Your Thynkdup has been Updated"
       redirect_to nutshell_path(@nutshell)
@@ -45,7 +42,6 @@ class NutshellsController < ApplicationController
   end
 
   def destroy
-    @nutshell = Nutshell.find(params[:id])
     @nutshell.destroy
     flash[:notice] = "Your Thynkdup has been Removed.  Let's Work on Some new Ideas."
     redirect_to nutshells_path
@@ -62,6 +58,10 @@ class NutshellsController < ApplicationController
       flash[:notice] = "This is not your Thynkdup"
       redirect_to nutshells_path
     end
+  end
+
+  def set_nutshell
+    @nutshell = Nutshell.find(params[:id])
   end
 
 end
