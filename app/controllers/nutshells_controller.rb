@@ -58,12 +58,12 @@ class NutshellsController < ApplicationController
   end
 
   def wrong_thynkdup_user
-    @nutshell = Nutshell.find(params[:id])
-    if @nutshell.user != current_user
+   if current_user != Nutshell.find(params[:id]).user
       flash[:notice] = "This is not your Thynkdup"
       redirect_to nutshells_path
     end
   end
+
 end
 
 

@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :nutshell_author, except: [:index]
+  before_action :wrong_note_user, except: [:index]
   def index
   end
 
@@ -53,9 +53,8 @@ protected
     params.require(:note).permit(:content, :title)
   end
 
-  def nutshell_author
-    @nutshell = Nutshell.find(params[:nutshell_id])
-    if @nutshell.user != current_user
+  def wrong_note_user
+    if current_user != Nutshell.find(params[:nutshell_id]).user
       flash[:notice] = "This is not your Thynkdup"
       redirect_to nutshells_path
     end
