@@ -20,6 +20,7 @@ class NutshellsController < ApplicationController
   def create
     @nutshell = Nutshell.new(nutshell_params)
     @nutshell.user = current_user
+    @nutshell.create_keywords
     if @nutshell.save
       flash[:notice] = "Sounds like a great idea!"
       redirect_to nutshell_path(@nutshell)
