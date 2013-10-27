@@ -4,14 +4,20 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :nutshells,
-    inverse_of: :user
+  has_many :nutshells, inverse_of: :user
 
-  has_many :notes,
-    through: :nutshells
+  has_many :notes, through: :nutshells
 
-  has_many :profiles,
-      inverse_of: :user
+  has_many :profiles, inverse_of: :user
+
+  has_many :thynkups, inverse_of: :user
+
+  has_many :friends, through: :thynkups
+
+  has_many :inverse_thynkups, class_name: "Thynkup", foreign_key: :thynker_id
+
+  has_many :inverse_friends, through: :inverse_thynkups, source: :user
+
 
   validates_presence_of :first_name
   validates_presence_of :last_name
