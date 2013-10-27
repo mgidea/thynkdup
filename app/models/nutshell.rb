@@ -19,10 +19,12 @@ class Nutshell < ActiveRecord::Base
   has_many :notes,
     inverse_of: :nutshell,
     dependent: :destroy
-  NEEDLESS_WORDS = %w{is a an and the it my that}
+
+  NEEDLESS_WORDS = %w{is a an and the it my that after although though because before even if
+   only now once rather since so than until when whenever where while}
 
   def create_keywords
-    self.keywords = content.downcase.split.reject{|word| NEEDLESS_WORDS.include?(word)}
-
+    words = title + " " + content
+    self.keywords = words.downcase.split.reject{|word| NEEDLESS_WORDS.include?(word)}.uniq!
   end
 end
