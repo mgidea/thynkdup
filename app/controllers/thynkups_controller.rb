@@ -1,7 +1,7 @@
 class ThynkupsController < ApplicationController
   def create
     @thynkup = current_user.thynkups.build(thynker_id: params[:thynker_id])
-    @thynkup.status = "requested"
+    @thynkup.status = "requesting"
     if @thynkup.save
       Thynkup.create(user_id: @thynkup.thynker_id, thynker_id: current_user.id)
       flash[:notice] = "You have a new Thynker"

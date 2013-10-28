@@ -25,6 +25,6 @@ class Nutshell < ActiveRecord::Base
 
   def create_keywords
     words = title + " " + content
-    self.keywords = words.downcase.split.reject{|word| NEEDLESS_WORDS.include?(word)}.uniq!
+    self.keywords = words.downcase.split.reject{|word| word.in?(NEEDLESS_WORDS)}.uniq!
   end
 end
