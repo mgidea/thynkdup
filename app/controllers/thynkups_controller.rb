@@ -1,9 +1,9 @@
 class ThynkupsController < ApplicationController
   def create
-    @thynkup = current_user.thynkups.build(thynkup_params[:thynker_id])
+    @thynkup = current_user.thynkups.build(thynker_id: params[:thynker_id])
     @thynkup.status = "requested"
     if @thynkup.save
-      Thynkup.create(user_id: @friendship.thynkup_id, thynker_id: current_user.id)
+      Thynkup.create(user_id: @thynkup.thynker_id, thynker_id: current_user.id)
       flash[:notice] = "You have a new Thynker"
       redirect_to profile_path(current_user)
     else
