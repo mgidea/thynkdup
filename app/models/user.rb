@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
 
   has_many :thynkups, inverse_of: :user
 
-  has_many :friends, through: :thynkups
+  has_many :thynkers, through: :thynkups
 
-  has_many :inverse_thynkups, class_name: "Thynkup", foreign_key: :thynker_id
+  has_many :co_thynkups, class_name: "Thynkup", foreign_key: :thynker_id
 
-  has_many :inverse_friends, through: :inverse_thynkups, source: :user
+  has_many :co_thynkers, through: :co_thynkups, source: :user
 
 
   validates_presence_of :first_name
