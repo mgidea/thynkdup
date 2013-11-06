@@ -1,8 +1,9 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, only: [:public, :show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :public, :index]
 
   def index
+    @profiles = Profile.all
   end
 
   def new

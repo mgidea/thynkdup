@@ -5,6 +5,7 @@ Thynkdup::Application.routes.draw do
     resources :notes
   end
 
+  resources :thynkups, only: [:create, :destroy]
   devise_for :users
   get "profiles/:id/public" => "profiles#public", as: :public
   get "pages/about"
