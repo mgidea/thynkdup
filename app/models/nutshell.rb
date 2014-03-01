@@ -21,10 +21,10 @@ class Nutshell < ActiveRecord::Base
     dependent: :destroy
 
   NEEDLESS_WORDS = %w{is a an and the it my that after although though because before even if
-   only now once rather since so than until when whenever where while}
+   only now once rather since so than until when whenever where while to}
 
   def create_keywords
-    words = title + " " + content
-    self.keywords = words.downcase.split.reject{|word| word.in?(NEEDLESS_WORDS)}.uniq!
+    words = (title + " " + content).downcase.split.uniq
+    self.keywords = words.reject{|word| word.in?(NEEDLESS_WORDS)}
   end
 end

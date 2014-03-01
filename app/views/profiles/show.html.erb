@@ -1,13 +1,13 @@
 This is your profile |
 <%= link_to "Update Profile", edit_profile_path(@profile) %> |
 <%= link_to "Delete Profile", @profile, method: :delete, data: { confirm: 'Are you sure?' }  %>
-<%= @profile.user.full_name %>
-<%= @profile.occupation %>
-<%= @profile.interests %>
-<%= @profile.aspirations %>
-<%= @profile.inspirations %>
-<%= @profile.goals %>
-<%= @profile.recommendations %>
+<%= @profile.user.full_name %></br>
+<%= @profile.occupation %></br>
+<%= @profile.interests %></br>
+<%= @profile.aspirations %></br>
+<%= @profile.inspirations %></br>
+<%= @profile.goals %></br>
+<%= @profile.recommendations %></br>
 <% @profile.user.nutshells.each do |nutshell|%>
-  <%= nutshell.title + "has " + pluralize(nutshell.notes.count, "note") %>
+  <%= nutshell.title + " has " + pluralize(nutshell.notes.count, "note") %>
 <% end %>

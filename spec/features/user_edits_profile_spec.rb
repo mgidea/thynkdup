@@ -33,8 +33,8 @@ feature "user edits their profile", %Q{
     sign_in_as(user2)
     visit edit_profile_path(profile)
 
-    expect(page).to have_content "This is the Public Version"
-    expect(page).to have_content "You are not the owner of this profile"
+    expect(page).to have_content "Welcome to #{user.full_name}'s profile"
+    expect(page).to have_link "thynkup"
     expect(page).to_not have_content "Update"
   end
 

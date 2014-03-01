@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
- it { should have_valid(:email).when("user@example.com", "user.me@example.then.com")}
+  it { should have_valid(:email).when("user@example.com", "user.me@example.then.com")}
   it { should_not have_valid(:email).when(nil, "") }
 
   it { should have_valid(:password).when("password", "12345678")}
@@ -14,7 +14,6 @@ describe User do
   it { should_not have_valid(:last_name).when(nil," ") }
 
   it "has matching password and password confirmation" do
-    prev_count = User.count
     user = User.new
     user.password = "password"
     user.password_confirmation = "different"
@@ -24,6 +23,11 @@ describe User do
   it { should have_many :nutshells}
   it { should have_many(:notes).through(:nutshells) }
   it { should have_many :profiles}
+
+  it "creates a full name out of first_name and last_name" do
+    user = FactoryGirl.create(:user)
+    expect(user.full_name).to eql("#{user.first_name} #{user.last_name}")
+  end
 end
 
 
