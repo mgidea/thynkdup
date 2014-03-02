@@ -2,7 +2,7 @@
   <strong>Title: </strong> <%= @nutshell.title %> |
   <%= link_to "Update Your Thynkdup", edit_nutshell_path(@nutshell) %> |
   <%= link_to "Delete Your Thynkdup", @nutshell, method: :delete, data: { confirm: 'Are you sure?' } %> |
-  <% if current_user.profiles.count == 0 %>
+  <% if current_user.profiles.empty? %>
     <%= link_to "Create Your Profile", new_profile_path %>
   <% else %>
     <%= link_to "View Your Profile", profile_path(current_user.profiles.first) %>
@@ -22,18 +22,13 @@
   If you would like to develop your idea further
   <%= link_to "Write a New Note", new_nutshell_note_path(@nutshell, @note) %><br>
   <div>
-    <% if @nutshell.notes.count > 0 %>
+    <% if @nutshell.notes.any? %>
       <div>My Thynkdup Notes</div>
       <% @nutshell.notes.each_with_index do |note, index| %>
-        <% if note.title != nil %>
-          <strong><%= "Title: " + note.title %></strong> |
-          <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %>
-          <%= link_to "Delete Note", nutshell_note_path(@nutshell, note), method: :delete, data: { confirm: 'Are you sure?' } %><br>
-        <% else %>
-          <strong><%= @nutshell.title + "-Note #{(index + 1).to_s}" %></strong> |
-          <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %> |
-          <%= link_to "Delete Note", nutshell_note_path(@nutshell, note), method: :delete, data: { confirm: 'Are you sure?' } %><br>
-        <% end %>
+        <% note_title = note.title.present? ? "Title: #{note.title}" : "#{@nutshell.title}-Note-#{(index + 1).to_s}" %>
+        <strong><%= note_title %></strong> |
+        <%= link_to "Edit Note", edit_nutshell_note_path(@nutshell, note) %>
+        <%= link_to "Delete Note", nutshell_note_path(@nutshell, note), method: :delete, data: { confirm: 'Are you sure?' } %><br>
         <%= note.content %><br>
       <% end %>
     <% end %>

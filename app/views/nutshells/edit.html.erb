@@ -1,6 +1,4 @@
 <%= simple_form_for @nutshell do |f| %>
-  <%=f.input :title %>
-  <%=f.input :content %>
-  <%=f.association :categories, as: :check_boxes, label: 'Context of Thynkdup' %>
+  <%= render partial: "form", locals: { f: f }%>
   <%=f.submit "Update Your Thynkdup"%>
 <% end %>

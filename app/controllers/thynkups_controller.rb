@@ -5,10 +5,14 @@ class ThynkupsController < ApplicationController
     if @thynkup.save
       Thynkup.create(user_id: @thynkup.thynker_id, thynker_id: current_user.id)
       flash[:notice] = "You have a new Thynker"
-      redirect_to profile_path(current_user)
+      if current_user.profiles.present?
+        redirect_to profile_path(current_user)
+      else
+        redirect_to nutshells_path(current_user)
+      end
     else
       flash[:notice] = "Something went wrong"
-      redirect_to profile_path(current_user)
+      render profiles_path(params[:thynker_id])
     end
   end
 
@@ -17,10 +21,5 @@ class ThynkupsController < ApplicationController
     @thynkup.destroy
     flash[:notice] = "Your thynkup no longer exists"
     redirect_to profile_path(current_user)
-  end
-
-  protected
-  def thynkup_params
-    params.require(:thynkup).permit(:user_id, :thynker_id)
   end
 end
