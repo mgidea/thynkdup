@@ -3,7 +3,6 @@ class ThynkupsController < ApplicationController
     @thynkup = current_user.thynkups.build(thynker_id: params[:thynker_id])
     @thynkup.status = "requesting"
     if @thynkup.save
-      Thynkup.create(user_id: @thynkup.thynker_id, thynker_id: current_user.id)
       flash[:notice] = "You have a new Thynker"
       if current_user.profiles.present?
         redirect_to profile_path(current_user)

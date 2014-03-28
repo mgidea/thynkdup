@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user do
+  factory :user, :aliases => [:friend, :thynker] do
     sequence(:email) {|n| "email#{n}@factory.com" }
     password "password"
     password_confirmation "password"
@@ -31,5 +31,11 @@ FactoryGirl.define do
     goals "Happiness"
     recommendations "1984"
     user
+  end
+
+  factory :thynkup do
+    friend
+    thynker
+    status "requested"
   end
 end
