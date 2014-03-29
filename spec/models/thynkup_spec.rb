@@ -23,4 +23,23 @@ describe Thynkup do
     expect(other.status).to eql("pending")
     expect(connection.friend_id).to eql(other.thynker_id)
   end
+
+  it "can find by scope" do
+    FactoryGirl.create_list(:thynkup, 5)
+    list = Thynkup.last(5)
+    first, second, third, fourth, fifth = list
+    first.accept_thynkup
+    second.reject_thynkup
+
+    expect(Thynkup.pending.count).to eql(Thynkup.requested.count)
+    expect(Thynkup.linked.count).to eql(2)
+  end
+
+  it "can accept a thynkup" do
+    pending
+  end
+
+  it "can reject a thynkdup" do
+    pending
+  end
 end
