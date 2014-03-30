@@ -36,6 +36,6 @@ FactoryGirl.define do
   factory :thynkup do
     friend
     thynker
-    status "requested"
+    status "requesting"
   end
 end

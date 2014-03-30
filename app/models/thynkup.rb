@@ -1,5 +1,5 @@
 class Thynkup < ActiveRecord::Base
-  scope :requested, -> { where ({status: "requested"}) }
+  scope :requesting, -> { where ({status: "requesting"}) }
   scope :pending,   -> { where ({status: "pending"}) }
   scope :linked,    -> { where ({status: "linked"}) }
 
@@ -11,7 +11,7 @@ class Thynkup < ActiveRecord::Base
   after_create :reverse_thynkup
   validates_presence_of :friend
   validates_presence_of :thynker
-  validates_inclusion_of :status, in: %w{requested pending linked}
+  validates_inclusion_of :status, in: %w{requesting pending linked}
 
   def reverse_thynkup
     unless Thynkup.where(friend_id: self.thynker_id, thynker_id: self.friend_id).any?
@@ -23,8 +23,8 @@ class Thynkup < ActiveRecord::Base
     self.status == "pending"
   end
 
-  def requested?
-    self.status == "requested"
+  def requesting?
+    self.status == "requesting"
   end
 
   def linked?
@@ -36,23 +36,31 @@ class Thynkup < ActiveRecord::Base
   end
 
   def accept_thynkup
-    if pending? || requested?
-      self.status = "linked"
-      self.save!
+    if pending?
       opposing.status = "linked"
       opposing.save!
+      self.status = "linked"
+      self.save!
     end
   end
 
   def reject_thynkup
-    if pending? || requested?
-      self.destroy
+    if pending?
       opposing.destroy
+      self.destroy
+    end
+  end
+
+  def cancel_thynkup
+    if requesting?
+      opposing.destroy
+      self.destroy
     end
   end
 
   def destroy_thynkup
     if linked?
+      opposing.destroy
       self.destroy
     end
   end
