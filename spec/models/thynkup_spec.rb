@@ -36,7 +36,14 @@ describe Thynkup do
   end
 
   it "can accept a thynkup" do
-    pending
+    prev_linked_count = Thynkup.linked.count
+    thynkup = FactoryGirl.create(:thynkup)
+    prev_requested_count, prev_pending_account = Thynkup.requested.count, Thynkup.pending.count
+    thynkup.accept_thynkup
+
+    expect(Thynkup.linked.count).to eql(prev_linked_count + 2)
+    expect(Thynkup.requested.count).to eql(Thynkup.requested.count - 1)
+    expect(Thynkup.pending.count).to eql(Thynkup.pending.count - 1)
   end
 
   it "can reject a thynkdup" do
