@@ -38,13 +38,16 @@ class Thynkup < ActiveRecord::Base
     @opposing = Thynkup.where(friend_id: self.thynker_id, thynker_id: self.friend_id).first
   end
 
-  def accept_thynkup
+  def accept_request
     if pending?
-      opposing.status = "linked"
-      self.status = "linked"
-      self.save
-      other.save
+      self.accept_thynkup
+      opposing.accept_thynkup
     end
+  end
+
+  def accept_thynkup
+    self.status = "linked"
+    self.save
   end
 
   def reject_thynkup

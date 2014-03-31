@@ -31,7 +31,7 @@ describe Thynkup do
     FactoryGirl.create_list(:thynkup, 5)
     list = Thynkup.last(5)
     first, second, third, fourth, fifth = list
-    first.accept_thynkup
+    first.accept_request
     second.reject_thynkup
 
     expect(Thynkup.pending.count).to eql(Thynkup.requesting.count)
@@ -44,8 +44,8 @@ describe Thynkup do
     opposite = thynkup.opposing
     prev_thynkups = Thynkup.count
     prev_requesting_count, prev_pending_account = Thynkup.requesting.count, Thynkup.pending.count
-    opposite.accept_thynkup
-    binding.pry
+    opposite.accept_request
+
     expect(Thynkup.linked.count).to eql(prev_linked_count + 2)
     expect(Thynkup.requesting.count).to eql(prev_requesting_count - 1)
     expect(Thynkup.pending.count).to eql(prev_pending_account - 1)
@@ -82,8 +82,8 @@ describe Thynkup do
 
     opposite.destroy_thynkup
     expect(Thynkup.count).to eql(prev_count)
-    opposite.accept_thynkup
-    opposite.destroy_thynkup
+    opposite.accept_request
+    opposite.opposing.destroy_thynkup
     expect(Thynkup.count).to eql(prev_count - 2)
   end
 end
