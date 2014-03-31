@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 20140328150809) do
     t.integer  "friend_id"
   end
 
+  add_index "thynkups", ["friend_id", "thynker_id"], name: "index_thynkups_on_friend_id_and_thynker_id", unique: true, using: :btree
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",       null: false
     t.string   "encrypted_password",     default: "",       null: false

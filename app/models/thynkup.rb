@@ -14,8 +14,11 @@ class Thynkup < ActiveRecord::Base
   validates_inclusion_of :status, in: %w{requesting pending linked}
 
   def reverse_thynkup
-    unless Thynkup.where(friend_id: self.thynker_id, thynker_id: self.friend_id).any?
+    return if Thynkup.where(friend_id: self.thynker_id, thynker_id: self.friend_id).any?
+    if requesting?
       Thynkup.create(friend_id: self.thynker_id, thynker_id: self.friend_id, status: "pending")
+    elsif linked?
+      Thynkup.create(friend_id: self.thynker_id, thynker_id: self.friend_id, status: "linked")
     end
   end
 
@@ -32,15 +35,15 @@ class Thynkup < ActiveRecord::Base
   end
 
   def opposing
-    @opposing ||= Thynkup.where(friend_id: self.thynker_id, thynker_id: self.friend_id).first
+    @opposing = Thynkup.where(friend_id: self.thynker_id, thynker_id: self.friend_id).first
   end
 
   def accept_thynkup
     if pending?
       opposing.status = "linked"
-      opposing.save!
       self.status = "linked"
-      self.save!
+      self.save
+      other.save
     end
   end
 

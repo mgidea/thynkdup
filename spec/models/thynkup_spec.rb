@@ -17,11 +17,14 @@ describe Thynkup do
     prev_count = Thynkup.count
     connection = FactoryGirl.create(:thynkup)
     other = Thynkup.last
+    opposite = connection.opposing
 
     expect(prev_count).to eql(Thynkup.count - 2)
     expect(connection.status).to eql("requesting")
     expect(other.status).to eql("pending")
     expect(connection.friend_id).to eql(other.thynker_id)
+    expect(opposite).to eql(other)
+    expect(opposite.opposing).to eql(connection)
   end
 
   it "can find by scope" do
@@ -42,7 +45,7 @@ describe Thynkup do
     prev_thynkups = Thynkup.count
     prev_requesting_count, prev_pending_account = Thynkup.requesting.count, Thynkup.pending.count
     opposite.accept_thynkup
-
+    binding.pry
     expect(Thynkup.linked.count).to eql(prev_linked_count + 2)
     expect(Thynkup.requesting.count).to eql(prev_requesting_count - 1)
     expect(Thynkup.pending.count).to eql(prev_pending_account - 1)
